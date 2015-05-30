@@ -17,4 +17,3 @@ before_script:
 - pkg-config --modversion gnutls
 - ls -al /usr/local/lib
 - ls -al /usr/lib/x86_64-linux-gnu/libgnutls*
-
