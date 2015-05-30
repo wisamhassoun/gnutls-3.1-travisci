@@ -1,0 +1,20 @@
+language: php
+php: 5.5
+sudo: required
+before_script:
+- ls -al /usr/local/lib
+- ls -al /usr/lib/x86_64-linux-gnu/libgnutls*
+- dpkg -l|grep 7\.22 || echo "None"
+- dpkg -l|grep 2\.12 || echo "None"
+- echo '<?php phpinfo(); ?>' | php |grep -i ssl
+- echo '<?php var_dump(curl_version()); ?>' | php 
+- sudo bash updateGnutls.sh
+- dpkg -l|grep 7\.22 || echo "None"
+- dpkg -l|grep 2\.12 || echo "None"
+- echo '<?php phpinfo(); ?>' | php |grep -i ssl
+- echo '<?php var_dump(curl_version()); ?>' | php 
+- composer self-update
+- composer install
+- ls -al /usr/local/lib
+- ls -al /usr/lib/x86_64-linux-gnu/libgnutls*
+
