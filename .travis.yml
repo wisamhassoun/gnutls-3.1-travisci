@@ -8,11 +8,13 @@ before_script:
 - dpkg -l|grep 2\.12 || echo "None"
 - echo '<?php phpinfo(); ?>' | php |grep -i ssl
 - echo '<?php var_dump(curl_version()); ?>' | php 
+- pkg-config --modversion gnutls
 - sudo bash updateGnutls.sh
 - dpkg -l|grep 7\.22 || echo "None"
 - dpkg -l|grep 2\.12 || echo "None"
 - echo '<?php phpinfo(); ?>' | php |grep -i ssl
 - echo '<?php var_dump(curl_version()); ?>' | php 
+- pkg-config --modversion gnutls
 - composer self-update
 - composer install
 - ls -al /usr/local/lib
