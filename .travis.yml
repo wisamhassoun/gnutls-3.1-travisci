@@ -3,5 +3,6 @@ php: 5.5
 sudo: required
 before_script:
 - make check
+- exit 1
 - sudo make install
 - make check
