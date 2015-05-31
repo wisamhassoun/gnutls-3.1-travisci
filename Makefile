@@ -103,7 +103,7 @@ installCurl:
 	sudo ln -s /usr/local/lib/libgnutls.so.28 /usr/lib/
 	wget http://curl.haxx.se/download/curl-7.42.1.tar.gz
 	tar -xzf curl-7.42.1.tar.gz
-	cd curl-7.42.1 && ./configure $(curlDependencies) && make && make check && sudo make install
+	cd curl-7.42.1 && ./configure $(curlDependencies) && make && ( make check || echo "curl/make check failed" ) && sudo make install
 	sudo rm /usr/lib/x86_64-linux-gnu/libcurl.so.3
 	sudo rm /usr/lib/x86_64-linux-gnu/libcurl.so.4
 	sudo ln -s /usr/local/lib/libcurl.so.4 /usr/lib/x86_64-linux-gnu/libcurl.so.3
