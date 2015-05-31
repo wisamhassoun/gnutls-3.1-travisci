@@ -1,9 +1,9 @@
-all: prepare test install test
+all: prepare check install check
 
 prepare:
 	sudo apt-get install libgmp-dev autogen pkg-config make m4 php5-cli php5-curl build-essential
 
-test:
+check:
 	whoami
 	ls -al /usr/local/lib
 	ls -al /usr/lib/x86_64-linux-gnu/libgnutls*
