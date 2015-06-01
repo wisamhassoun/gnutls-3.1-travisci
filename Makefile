@@ -13,7 +13,8 @@ check:
 	echo '<?php phpinfo(); ?>' | php |grep -i ssl
 	echo '<?php var_dump(curl_version()); ?>' | php 
 	pkg-config --modversion gnutls || echo "pkg-config --modversion gnutls failed"
-	ldd /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4|grep gnut
+	ldd /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4|grep gnut # Not sure what this is for
+	ldd /usr/lib/php5/20090626/curl.so|grep gnutls # after installCurl, this should link to libcurl.so...28 instead of 26
 
 install: installNettle installGnutls installCurl
 
@@ -30,91 +31,16 @@ installGnutls:
 	tar -xvf gnutls-3.1.28.tar
 	cd gnutls-3.1.28 && ./configure && make && make check && sudo make install
 
-curlDependencies1 = --enable-intl \
-	--with-openssl \
-	--without-pear \
-	--with-gd \
-	--with-jpeg-dir=/usr \
-	--with-png-dir=/usr \
-	--with-freetype-dir=/usr \
-	--with-freetype \
-	--enable-exif \
-	--enable-zip \
-	--with-zlib \
-	--with-zlib-dir=/usr \
-	--with-mcrypt=/usr \
-	--with-pdo-sqlite \
-	--enable-soap \
-	--enable-xmlreader \
-	--with-xsl \
-	--enable-ftp \
-	--with-tidy \
-	--with-xmlrpc \
-	--enable-sysvsem \
-	--enable-sysvshm \
-	--enable-sysvmsg \
-	--enable-shmop \
-	--with-mysql=mysqlnd \
-	--with-mysqli=mysqlnd \
-	--with-pdo-mysql=mysqlnd \
-	--enable-pcntl \
-	--with-readline \
-	--enable-mbstring \
-	--with-curl \
-	--with-pgsql \
-	--with-pdo-pgsql \
-	--with-gettext \
-	--enable-sockets \
-	--with-bz2 \
-	--enable-bcmath \
-	--enable-calendar \
-	--with-libdir=lib \
-	--enable-fpm \
-	--enable-maintainer-zts \
-	--with-gmp \
-	--with-kerberos \
-	--with-imap \
-	--with-imap-ssl \
-	--with-ldap=shared \
-	--with-ldap-sasl \
-	--enable-dba \
-	--with-cdb \
-	--with-inifile \
-	--with-gnutls=/usr/local/lib
-
-curlDependencies2 = --with-config-file-path=/home/travis/.phpenv/versions/5.5.21/etc \
-	--with-config-file-scan-dir=/home/travis/.phpenv/versions/5.5.21/etc/conf.d \
-	--prefix=/home/travis/.phpenv/versions/5.5.21 \
-	--libexecdir=/home/travis/.phpenv/versions/5.5.21/libexec \
-	--with-pear=/home/travis/.phpenv/versions/5.5.21/pear
-
-ifeq (`whoami`,"travis")
-	curlDependencies = $(curlDependencies1) $(curlDependencies2)
-else
-	curlDependencies = $(curlDependencies1)
-endif
-
 installCurl:
 	# compiling curl
-	# Purpose is that library link to libgnutls.so.28
-	# and not libgnutls.so.26 as below
-	# ubuntu@ip-172-31-16-114:~$ ldd /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4|grep gnut
-	#  libgnutls.so.26 => /usr/lib/x86_64-linux-gnu/libgnutls.so.26 (0x00007fabdfd4d000)
 	sudo ln -s /usr/local/lib/libnettle.so.4 /usr/lib/
 	sudo ln -s /usr/local/lib/libgnutls.so.28 /usr/lib/
 	wget http://curl.haxx.se/download/curl-7.42.1.tar.gz
 	tar -xzf curl-7.42.1.tar.gz
-	cd curl-7.42.1 && ./configure $(curlDependencies) && make && ( make check || echo "curl/make check failed" ) && sudo make install
-	#cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl.a libcurl.la libcurl.so libcurl.so.3 libcurl.so.4 libcurl-gnutls.a libcurl-gnutls.la libcurl-gnutls.so libcurl-gnutls.so.3 libcurl-gnutls.so.4 
-	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl-gnutls.a libcurl-gnutls.la libcurl-gnutls.so libcurl-gnutls.so.3 libcurl-gnutls.so.4 
-	#sudo ln -s /usr/local/lib/libcurl.a /usr/lib/x86_64-linux-gnu/libcurl.a
-	#sudo ln -s /usr/local/lib/libcurl.la /usr/lib/x86_64-linux-gnu/libcurl.la
-	#sudo ln -s /usr/local/lib/libcurl.so /usr/lib/x86_64-linux-gnu/libcurl.so
-	#sudo ln -s /usr/local/lib/libcurl.so.4 /usr/lib/x86_64-linux-gnu/libcurl.so.3
-	#sudo ln -s /usr/local/lib/libcurl.so.4.3.0 /usr/lib/x86_64-linux-gnu/libcurl.so.4
-	sudo ln -s /usr/local/lib/libcurl.a /usr/lib/x86_64-linux-gnu/libcurl-gnutls.a
-	sudo ln -s /usr/local/lib/libcurl.la /usr/lib/x86_64-linux-gnu/libcurl-gnutls.la
-	sudo ln -s /usr/local/lib/libcurl.so /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so
-	sudo ln -s /usr/local/lib/libcurl.so.4 /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.3
-	sudo ln -s /usr/local/lib/libcurl.so.4.3.0 /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4
-
+	cd curl-7.42.1 && ./configure --with-gnutls=/usr/local/lib && make && ( make check || echo "curl/make check failed" ) && sudo make install
+	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl.a libcurl.la libcurl.so libcurl.so.3 libcurl.so.4
+	sudo ln -s /usr/local/lib/libcurl.a /usr/lib/x86_64-linux-gnu/libcurl.a
+	sudo ln -s /usr/local/lib/libcurl.la /usr/lib/x86_64-linux-gnu/libcurl.la
+	sudo ln -s /usr/local/lib/libcurl.so /usr/lib/x86_64-linux-gnu/libcurl.so
+	sudo ln -s /usr/local/lib/libcurl.so.4 /usr/lib/x86_64-linux-gnu/libcurl.so.3
+	sudo ln -s /usr/local/lib/libcurl.so.4.3.0 /usr/lib/x86_64-linux-gnu/libcurl.so.4
