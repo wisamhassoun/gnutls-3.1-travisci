@@ -1,6 +1,7 @@
 all: prepare check install check
 
 prepare:
+	sudo apt-get update
 	sudo apt-get install libgmp-dev autogen pkg-config make m4 php5-cli php5-curl build-essential
 
 check:
