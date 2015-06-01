@@ -23,6 +23,7 @@ installNettle:
 	wget ftp://ftp.gnu.org/gnu/nettle/nettle-2.7.1.tar.gz
 	tar -xzf nettle-2.7.1.tar.gz
 	cd nettle-2.7.1 && ./configure && make && make check && sudo make install
+	sudo ldconfig -v
 
 installGnutls:
 	# gnutls ..  3.1 is current stable
@@ -30,17 +31,19 @@ installGnutls:
 	unxz gnutls-3.1.28.tar.xz
 	tar -xvf gnutls-3.1.28.tar
 	cd gnutls-3.1.28 && ./configure && make && make check && sudo make install
+	sudo ldconfig -v
 
 installCurl:
 	# compiling curl
-	sudo ln -s /usr/local/lib/libnettle.so.4 /usr/lib/
-	sudo ln -s /usr/local/lib/libgnutls.so.28 /usr/lib/
+	#sudo ln -s /usr/local/lib/libnettle.so.4 /usr/lib/
+	#sudo ln -s /usr/local/lib/libgnutls.so.28 /usr/lib/
 	wget http://curl.haxx.se/download/curl-7.42.1.tar.gz
 	tar -xzf curl-7.42.1.tar.gz
 	cd curl-7.42.1 && ./configure --with-gnutls=/usr/local/lib && make && ( make check || echo "curl/make check failed" ) && sudo make install
 	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl.a libcurl.la libcurl.so libcurl.so.3 libcurl.so.4
-	sudo ln -s /usr/local/lib/libcurl.a /usr/lib/x86_64-linux-gnu/libcurl.a
-	sudo ln -s /usr/local/lib/libcurl.la /usr/lib/x86_64-linux-gnu/libcurl.la
-	sudo ln -s /usr/local/lib/libcurl.so /usr/lib/x86_64-linux-gnu/libcurl.so
-	sudo ln -s /usr/local/lib/libcurl.so.4 /usr/lib/x86_64-linux-gnu/libcurl.so.3
-	sudo ln -s /usr/local/lib/libcurl.so.4.3.0 /usr/lib/x86_64-linux-gnu/libcurl.so.4
+	sudo ldconfig -v
+	#sudo ln -s /usr/local/lib/libcurl.a /usr/lib/x86_64-linux-gnu/libcurl.a
+	#sudo ln -s /usr/local/lib/libcurl.la /usr/lib/x86_64-linux-gnu/libcurl.la
+	#sudo ln -s /usr/local/lib/libcurl.so /usr/lib/x86_64-linux-gnu/libcurl.so
+	#sudo ln -s /usr/local/lib/libcurl.so.4 /usr/lib/x86_64-linux-gnu/libcurl.so.3
+	#sudo ln -s /usr/local/lib/libcurl.so.4.3.0 /usr/lib/x86_64-linux-gnu/libcurl.so.4
