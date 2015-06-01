@@ -1,5 +1,3 @@
-all: prepare check install check
-
 prepare:
 	sudo apt-get update
 	sudo apt-get install libgmp-dev autogen pkg-config make m4 php5-cli php5-curl build-essential
@@ -41,7 +39,7 @@ installCurl:
 	wget http://curl.haxx.se/download/curl-7.42.1.tar.gz
 	tar -xzf curl-7.42.1.tar.gz
 	cd curl-7.42.1 && ./configure --with-gnutls=/usr/local/lib && make && ( make check || echo "curl/make check failed" ) && sudo make install
-	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl.a libcurl.la libcurl.so libcurl.so.3 libcurl.so.4
+	#cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl.a libcurl.la libcurl.so libcurl.so.3 libcurl.so.4
 	sudo ldconfig -v
 	#sudo ln -s /usr/local/lib/libcurl.a /usr/lib/x86_64-linux-gnu/libcurl.a
 	#sudo ln -s /usr/local/lib/libcurl.la /usr/lib/x86_64-linux-gnu/libcurl.la

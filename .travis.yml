@@ -1,4 +1,8 @@
 language: php
 php: 5.5
 sudo: required
-before_script: make
+before_script:
+- make prepare
+- make check
+- make install
+- make check
