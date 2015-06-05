@@ -2,13 +2,9 @@ language: php
 php: 5.5
 sudo: required
 before_script:
-- if [ -d $HOME/ToBeCached ]; then sudo cp $HOME/ToBeCached/*  /usr/local/lib; else mkdir -p $HOME/ToBeCached; fi
 - make prepare
 - make check
-- if [ ! -f /usr/local/lib/libnettle* ]; then make installNettle; cp /usr/local/lib/libnettle* $HOME/ToBeCached; fi
-- if [ ! -f /usr/local/lib/libgnutls* ]; then make installGnutls; cp /usr/local/lib/libgnutls* $HOME/ToBeCached; fi
+- make installNettle
+- make installGnutls
 - make installCurl
 - make check
-cache:
-  directories:
-  - $HOME/ToBeCached
