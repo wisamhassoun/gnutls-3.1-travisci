@@ -5,14 +5,14 @@ prepare:
 check:
 	whoami
 	ls -al /usr/local/lib
-	ls -al /usr/lib/x86_64-linux-gnu/libgnutls*
-	ls -al /usr/lib/x86_64-linux-gnu/libcurl*
+	#ls -al /usr/lib/x86_64-linux-gnu/libgnutls*
+	#ls -al /usr/lib/x86_64-linux-gnu/libcurl*
 	dpkg -l|grep 7\.22 || echo "None"
 	dpkg -l|grep 2\.12 || echo "None"
 	echo '<?php phpinfo(); ?>' | php |grep -i ssl
 	echo '<?php var_dump(curl_version()); ?>' | php 
 	pkg-config --modversion gnutls || echo "pkg-config --modversion gnutls failed"
-	ldd /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4|grep gnut # Not sure what this is for
+	#ldd /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4|grep gnut # Not sure what this is for
 	(ldd /usr/lib/php5/20090626/curl.so|grep gnutls)|| echo "no package curl.so in /usr/lib/php5" # after installCurl, this should link to libcurl.so...28 instead of 26
 	ls $(HOME)
 
@@ -38,5 +38,4 @@ installCurl:
 	wget http://curl.haxx.se/download/curl-7.42.1.tar.gz
 	tar -xzf curl-7.42.1.tar.gz
 	cd curl-7.42.1 && ./configure --without-ssl --with-gnutls && make && ( make check || echo "curl/make check failed" ) && sudo make install
-	cd /usr/lib/x86_64-linux-gnu/ && sudo rm -f libcurl* libgnutls*
 	sudo ldconfig -v
