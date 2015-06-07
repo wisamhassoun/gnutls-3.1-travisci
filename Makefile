@@ -33,10 +33,10 @@ installGnutls:
 
 installCurl:
 	# compiling curl
-	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl* libgnutls*
+	cd /usr/lib/x86_64-linux-gnu/ && sudo rm -f libcurl* libgnutls*
 	sudo ldconfig -v
 	wget http://curl.haxx.se/download/curl-7.42.1.tar.gz
 	tar -xzf curl-7.42.1.tar.gz
 	cd curl-7.42.1 && ./configure --without-ssl --with-gnutls && make && ( make check || echo "curl/make check failed" ) && sudo make install
-	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl* libgnutls*
+	cd /usr/lib/x86_64-linux-gnu/ && sudo rm -f libcurl* libgnutls*
 	sudo ldconfig -v
