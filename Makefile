@@ -33,15 +33,8 @@ installGnutls:
 
 installCurl:
 	# compiling curl
-	#sudo ln -s /usr/local/lib/libnettle.so.4 /usr/lib/
-	#sudo ln -s /usr/local/lib/libgnutls.so.28 /usr/lib/
 	wget http://curl.haxx.se/download/curl-7.42.1.tar.gz
 	tar -xzf curl-7.42.1.tar.gz
 	cd curl-7.42.1 && ./configure --without-ssl --with-gnutls && make && ( make check || echo "curl/make check failed" ) && sudo make install
-	#cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl.a libcurl.la libcurl.so libcurl.so.3 libcurl.so.4
+	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl.a libcurl-gnutls.a libcurl-gnutls.la libcurl.la libcurl-gnutls.so libcurl.so libgnutls.a libgnutls-extra.a libgnutls-extra.so libgnutls-openssl.a libgnutls-openssl.so libgnutls-openssl.so.27 libgnutls-openssl.so.27.0.0 libgnutls.so libgnutlsxx.a libgnutlsxx.so libgnutlsxx.so.27 libgnutlsxx.so.27.0.0
 	sudo ldconfig -v
-	#sudo ln -s /usr/local/lib/libcurl.a /usr/lib/x86_64-linux-gnu/libcurl.a
-	#sudo ln -s /usr/local/lib/libcurl.la /usr/lib/x86_64-linux-gnu/libcurl.la
-	#sudo ln -s /usr/local/lib/libcurl.so /usr/lib/x86_64-linux-gnu/libcurl.so
-	#sudo ln -s /usr/local/lib/libcurl.so.4 /usr/lib/x86_64-linux-gnu/libcurl.so.3
-	#sudo ln -s /usr/local/lib/libcurl.so.4.3.0 /usr/lib/x86_64-linux-gnu/libcurl.so.4
