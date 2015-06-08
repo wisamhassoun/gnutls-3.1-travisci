@@ -1,11 +1,11 @@
 install:
 	sudo apt-get install make php5-cli
-	curl -sS https://getcomposer.org/installer | php
-	sudo mv composer.phar /usr/local/bin/composer
+	#curl -sS https://getcomposer.org/installer | php
+	#sudo mv composer.phar /usr/local/bin/composer
 	wget https://phar.phpunit.de/phpunit.phar
 	chmod +x phpunit.phar
 	sudo mv phpunit.phar /usr/local/bin/phpunit
-	composer install
+	#composer install
 	phpunit tests/
 
 prepare:
