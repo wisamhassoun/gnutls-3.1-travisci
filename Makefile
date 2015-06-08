@@ -5,8 +5,8 @@ prepare:
 check:
 	whoami
 	ls -al /usr/local/lib
-	#ls -al /usr/lib/x86_64-linux-gnu/libgnutls*
-	#ls -al /usr/lib/x86_64-linux-gnu/libcurl*
+	ls -al /usr/lib/x86_64-linux-gnu/libgnutls* || echo "No file libgnutls* in /usr/lib/x86..."
+	ls -al /usr/lib/x86_64-linux-gnu/libcurl* || echo "No file libcurl* in /usr/lib/x86..."
 	dpkg -l|grep 7\.22 || echo "None"
 	dpkg -l|grep 2\.12 || echo "None"
 	echo '<?php phpinfo(); ?>' | php |grep -i ssl
