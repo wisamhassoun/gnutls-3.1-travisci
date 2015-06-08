@@ -1,3 +1,12 @@
+install:
+	curl -sS https://getcomposer.org/installer | php
+	sudo mv composer.phar /usr/local/bin/composer
+	wget https://phar.phpunit.de/phpunit.phar
+	chmod +x phpunit.phar
+	sudo mv phpunit.phar /usr/local/bin/phpunit
+	composer install
+	phpunit tests/
+
 prepare:
 	sudo apt-get update
 	sudo apt-get install libgmp-dev autogen pkg-config make m4 php5-cli php5-curl build-essential
