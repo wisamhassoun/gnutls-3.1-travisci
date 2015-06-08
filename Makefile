@@ -42,6 +42,7 @@ check:
 	ls $(HOME)
 	ldconfig -p|grep curl
 	ldconfig -p|grep gnutls
+	pkg-config gnutls --libs || echo "pkg-config gnutls error"
 
 installNettle:
 	# nettle .. 2.7.1 is the specific version that gnutls 3.1 requires
