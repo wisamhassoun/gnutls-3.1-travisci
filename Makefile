@@ -31,13 +31,21 @@ installGnutls:
 	unxz gnutls-3.1.28.tar.xz
 	tar -xvf gnutls-3.1.28.tar
 	cd gnutls-3.1.28 && ./configure && make && make check && sudo make install
+	cd /usr/lib/x86_64-linux-gnu/ && sudo rm -f libgnutls*
 	sudo ldconfig -v
 
 installCurl:
 	# compiling curl
-	cd /usr/lib/x86_64-linux-gnu/ && sudo rm -f libcurl* libgnutls*
-	sudo ldconfig -v
 	wget http://curl.haxx.se/download/curl-7.42.1.tar.gz
 	tar -xzf curl-7.42.1.tar.gz
 	cd curl-7.42.1 && ./configure --without-ssl --with-gnutls && make && ( make check || echo "curl/make check failed" ) && sudo make install
+	cd /usr/lib/x86_64-linux-gnu/ && sudo rm -f libcurl*
 	sudo ldconfig -v
+
+installPhp:
+	wget http://php.net/get/php-5.6.9.tar.bz2/from/this/mirror
+	bunzip php-5.6.9.tar.bz2
+	tar -xvf php-5.6.9.tar
+	cd php-5.6.9 && ./configure --with-config-file-path=/home/travis/.phpenv/versions/5.5.21/etc --with-config-file-scan-dir=/home/travis/.phpenv/versions/5.5.21/etc/conf.d --prefix=/home/travis/.phpenv/versions/5.5.21 --libexecdir=/home/travis/.phpenv/versions/5.5.21/libexec --enable-intl --with-openssl --without-pear --with-gd --with-jpeg-dir=/usr --with-png-dir=/usr --with-freetype-dir=/usr --with-freetype --enable-exif --enable-zip --with-zlib --with-zlib-dir=/usr --with-mcrypt=/usr --with-pdo-sqlite --enable-soap --enable-xmlreader --with-xsl --enable-ftp --with-tidy --with-xmlrpc --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-shmop --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --enable-pcntl --with-readline --enable-mbstring --with-curl --with-pgsql --with-pdo-pgsql --with-gettext --enable-sockets --with-bz2 --enable-bcmath --enable-calendar --with-libdir=lib --enable-fpm --enable-maintainer-zts --with-gmp --with-kerberos --with-imap --with-imap-ssl --with-ldap=shared --with-ldap-sasl --enable-dba --with-cdb --with-inifile --with-pear=/home/travis/.phpenv/versions/5.5.21/pear && make && make check
+	sudo ldconfig -v
+
