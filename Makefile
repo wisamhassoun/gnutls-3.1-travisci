@@ -4,7 +4,8 @@ install:
 	sudo ldconfig -v
 	#cd /usr/lib/x86_64-linux-gnu/ && sudo rm libgnutls* && cd -
 	wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/gnutls_3.1.28-1_amd64.deb && sudo dpkg -i gnutls_3.1.28-1_amd64.deb
-	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libgnutls-openssl.so.27 libgnutls-openssl.so libgnutlsxx.so libgnutlsxx.so.27 libneon-gnutls.so.27 && cd - # testing
+	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libgnutls-openssl.so.27 libgnutls-openssl.so libgnutlsxx.so libgnutlsxx.so.27 && cd - # testing
+	cd /usr/lib/ && sudo rm libneon-gnutls.so.27 && cd - # testing
 	sudo ldconfig -v
 	# instead of the below rm, which removes /usr/lib/x86.../libcurl-gnutls.so.4 (and even if I ln -s to /usr/local/lib/libcurl.so.4, it doesn't really work), 
 	# I should figure out how libcurl-gnutls.so.4 gets generated
