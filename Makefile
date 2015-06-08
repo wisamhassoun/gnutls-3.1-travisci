@@ -52,7 +52,7 @@ installNettle:
 	# nettle .. 2.7.1 is the specific version that gnutls 3.1 requires
 	wget ftp://ftp.gnu.org/gnu/nettle/nettle-2.7.1.tar.gz
 	tar -xzf nettle-2.7.1.tar.gz
-	cd nettle-2.7.1 && ./configure && make && make check && sudo make install
+	#cd nettle-2.7.1 && ./configure && make && make check && sudo make install
 	sudo ldconfig -v
 
 installGnutls:
@@ -61,7 +61,7 @@ installGnutls:
 	unxz gnutls-3.1.28.tar.xz
 	tar -xvf gnutls-3.1.28.tar
 	cd gnutls-3.1.28 && ./configure && make && make check && sudo make install
-	cd /usr/lib/x86_64-linux-gnu/ && sudo rm -f libgnutls*
+	#cd /usr/lib/x86_64-linux-gnu/ && sudo rm -f libgnutls*
 	sudo ldconfig -v
 
 installCurl:
@@ -69,7 +69,7 @@ installCurl:
 	wget http://curl.haxx.se/download/curl-7.42.1.tar.gz
 	tar -xzf curl-7.42.1.tar.gz
 	cd curl-7.42.1 && ./configure --with-ssl --without-gnutls && make && ( make check || echo "curl/make check failed" ) && sudo make install
-	cd /usr/lib/x86_64-linux-gnu/ && sudo rm -f libcurl*
+	#cd /usr/lib/x86_64-linux-gnu/ && sudo rm -f libcurl*
 	sudo ldconfig -v
 
 installPhp:
