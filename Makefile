@@ -1,4 +1,5 @@
 install:
+	sudo apt-get install make php5-cli
 	curl -sS https://getcomposer.org/installer | php
 	sudo mv composer.phar /usr/local/bin/composer
 	wget https://phar.phpunit.de/phpunit.phar
