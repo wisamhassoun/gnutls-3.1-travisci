@@ -1,16 +1,27 @@
-install:
-	sudo apt-get install make php5-cli
+install: prepare
 	#curl -sS https://getcomposer.org/installer | php
 	#sudo mv composer.phar /usr/local/bin/composer
 	wget https://phar.phpunit.de/phpunit.phar
 	chmod +x phpunit.phar
 	sudo mv phpunit.phar /usr/local/bin/phpunit
 	#composer install
+	wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/nettle_2.7.1-1_amd64.deb && sudo dpkg -i nettle_2.7.1-1_amd64.deb
+	sudo ldconfig -v
+	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libgnutls* && cd -
+	wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/gnutls_3.1.28-1_amd64.deb && sudo dpkg -i gnutls_3.1.28-1_amd64.deb
+	sudo ldconfig -v
+	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl* && cd -
+	wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/curl_7.42.1-1_amd64.deb && sudo dpkg -i curl_7.42.1-1_amd64.deb
+	sudo ldconfig -v
 	phpunit tests/
 
 prepare:
 	sudo apt-get update
-	sudo apt-get install libgmp-dev autogen pkg-config make m4 php5-cli php5-curl build-essential
+	sudo apt-get install make php5-cli php5-curl
+
+prepare-dev:
+	sudo apt-get update
+	sudo apt-get install libgmp-dev autogen pkg-config m4 build-essential
 
 check:
 	whoami

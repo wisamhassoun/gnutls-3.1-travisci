@@ -6,7 +6,7 @@ The purpose is that `var_dump(curl_version())` in php gives a gnutls version of 
 # Compiling
 To compile curl to use the latest gnutls (and consequently compile the latest gnutls (and consequently compile nettle 2.7.1 as prerequisite))
 
-    make prepare
+    make prepare-dev
     make check
     make installNettle
     make installGnutls
