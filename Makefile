@@ -37,12 +37,14 @@ check:
 	echo '<?php phpinfo(); ?>' | php |grep -i ssl
 	echo '<?php var_dump(curl_version()); ?>' | php 
 	pkg-config --modversion gnutls || echo "pkg-config --modversion gnutls failed"
+	pkg-config gnutls --libs || echo "pkg-config gnutls error"
 	#ldd /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4|grep gnut # Not sure what this is for
 	(ldd /usr/lib/php5/20090626/curl.so|grep gnutls)|| echo "no package curl.so in /usr/lib/php5" # after installCurl, this should link to libcurl.so...28 instead of 26
 	ls $(HOME)
 	ldconfig -p|grep curl
+	ldconfig -v|grep curl
 	ldconfig -p|grep gnutls
-	pkg-config gnutls --libs || echo "pkg-config gnutls error"
+	ldconfig -v|grep gnutls
 
 installNettle:
 	# nettle .. 2.7.1 is the specific version that gnutls 3.1 requires
