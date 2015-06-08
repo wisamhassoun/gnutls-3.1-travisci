@@ -5,7 +5,6 @@ install:
 	#cd /usr/lib/x86_64-linux-gnu/ && sudo rm libgnutls* && cd -
 	wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/gnutls_3.1.28-1_amd64.deb && sudo dpkg -i gnutls_3.1.28-1_amd64.deb
 	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libgnutls-openssl.so.27 libgnutls-openssl.so libgnutlsxx.so libgnutlsxx.so.27 libgnutls-openssl.so.27.0.0 libgnutlsxx.so.27.0.0 && cd - # testing
-	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl.a libcurl-gnutls.a libcurl-gnutls.la libcurl-gnutls.so libcurl.la libcurl.so && cd - # testing
 	sudo ldconfig -v
 	sudo apt-get remove libneon27-gnutls
 	# instead of the below rm, which removes /usr/lib/x86.../libcurl-gnutls.so.4 (and even if I ln -s to /usr/local/lib/libcurl.so.4, it doesn't really work), 
