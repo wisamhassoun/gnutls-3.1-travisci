@@ -15,6 +15,8 @@ check:
 	#ldd /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4|grep gnut # Not sure what this is for
 	(ldd /usr/lib/php5/20090626/curl.so|grep gnutls)|| echo "no package curl.so in /usr/lib/php5" # after installCurl, this should link to libcurl.so...28 instead of 26
 	ls $(HOME)
+	ldconfig -p|grep curl
+	ldconfig -p|grep gnutls
 
 installNettle:
 	# nettle .. 2.7.1 is the specific version that gnutls 3.1 requires

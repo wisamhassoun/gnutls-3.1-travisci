@@ -1,7 +1,0 @@
-language: php
-php: 5.5
-sudo: required
-before_script:
-- wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/nettle_2.7.1-1_amd64.deb; sudo dpkg -i nettle_2.7.1-1_amd64.deb;
-- wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/gnutls....deb; sudo dpkg -i gnutls....deb;
-- wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/curl....deb; sudo dpkg -i curl....deb;

@@ -2,9 +2,10 @@ language: php
 php: 5.5
 sudo: required
 before_script:
-- make prepare
 - make check
-- make installNettle
-- make installGnutls
-- make installCurl
+- wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/nettle_2.7.1-1_amd64.deb && sudo dpkg -i nettle_2.7.1-1_amd64.deb
+- wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/gnutls_3.1.28-1_amd64.deb && sudo dpkg -i gnutls_3.1.28-1_amd64.deb
+- wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/curl_7.42.1-1_amd64.deb && sudo dpkg -i curl_7.42.1-1_amd64.deb
+- make check
+- ldconfig
 - make check
