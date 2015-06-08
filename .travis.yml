@@ -6,6 +6,7 @@ before_script:
 - ls -l /etc/ld.so.conf.d/*.conf
 - cat /etc/ld.so.conf.d/*.conf
 - echo $LD_LIBRARY_PATH
+- sudo apt-get remove libcurl4-gnutls-dev
 - make check
 - make prepare
 - make check
