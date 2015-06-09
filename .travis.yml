@@ -3,6 +3,8 @@ php: 5.5
 sudo: required
 before_script:
 - make install
+- sudo apt-get update
+- sudo apt-get install make php5-cli
 - sudo ldconfig
 - make check
 script:
