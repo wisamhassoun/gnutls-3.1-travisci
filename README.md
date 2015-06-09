@@ -1,7 +1,7 @@
 # gnutls-3.1-travisci
 Repository just to get to a successful source compilation of gnutls 3.1.28 
 
-The purpose is that `var_dump(curl_version())` in php gives a gnutls version of 3.1.28 on travis-ci workers [![Build Status](https://secure.travis-ci.org/shadiakiki1986/gnutls-3.1-travisci.png)](http://travis-ci.org/shadiakiki1986/gnutls-3.1-travisci)
+The purpose is that `var_dump(curl_version())` in php gives a gnutls version of 3.1.28 on travis-ci workers [![Build Status](https://secure.travis-ci.org/shadiakiki1986/gnutls-3.1-travisci.png)](http://travis-ci.org/shadiakiki1986/gnutls-3.1-travisci). This was spawned off from [here](https://github.com/shadiakiki1986/just-want-to-pass-dynamodb-travisci). Please check there for more details on why I needed this
 
 # Installing
 Run the same commands available in the `.travis.yml before_script` tag
