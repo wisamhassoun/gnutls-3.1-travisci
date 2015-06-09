@@ -1,17 +1,19 @@
 install: 
 	#composer install
 	wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/nettle_2.7.1-1_amd64.deb && sudo dpkg -i nettle_2.7.1-1_amd64.deb
-	sudo ldconfig -v
+	sudo ldconfig
 	#cd /usr/lib/x86_64-linux-gnu/ && sudo rm libgnutls* && cd -
 	wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/gnutls_3.1.28-1_amd64.deb && sudo dpkg -i gnutls_3.1.28-1_amd64.deb
 	cd /usr/lib/x86_64-linux-gnu/ && sudo rm libgnutls-openssl.so.27 libgnutls-openssl.so libgnutlsxx.so libgnutlsxx.so.27 libgnutls-openssl.so.27.0.0 libgnutlsxx.so.27.0.0 && cd - # testing
-	sudo ldconfig -v
+	sudo ldconfig
 	sudo apt-get remove libneon27-gnutls
 	# instead of the below rm, which removes /usr/lib/x86.../libcurl-gnutls.so.4 (and even if I ln -s to /usr/local/lib/libcurl.so.4, it doesn't really work), 
 	# I should figure out how libcurl-gnutls.so.4 gets generated
 	# cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl* && cd -
 	wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/curl_7.42.1-1_amd64.deb && sudo dpkg -i curl_7.42.1-1_amd64.deb
-	sudo ldconfig -v
+	sudo ldconfig
+	sudo apt-get install php5-curl
+	sudo ldconfig
 
 test:
 	phpunit tests/
@@ -27,7 +29,7 @@ prepare:
 
 prepare-dev:
 	sudo apt-get update
-	sudo apt-get install libgmp-dev autogen pkg-config m4 build-essential
+	sudo apt-get install libgmp-dev autogen pkg-config m4 build-essential libgnutls28-dev libgcrypt11-dev
 
 check:
 	whoami
