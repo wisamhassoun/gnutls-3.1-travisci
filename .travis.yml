@@ -6,3 +6,4 @@ before_script:
 - make prepare
 - sudo ldconfig
 - make check
+script: /usr/bin/php5 phpunit.phar tests/

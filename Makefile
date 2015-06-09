@@ -23,7 +23,7 @@ prepare:
 	#sudo mv composer.phar /usr/local/bin/composer
 	wget https://phar.phpunit.de/phpunit.phar
 	chmod +x phpunit.phar
-	sudo mv phpunit.phar /usr/local/bin/phpunit
+	#sudo mv phpunit.phar /usr/local/bin/phpunit
 
 prepare-dev:
 	sudo apt-get update
