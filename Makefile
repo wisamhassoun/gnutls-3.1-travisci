@@ -12,8 +12,6 @@ install:
 	# cd /usr/lib/x86_64-linux-gnu/ && sudo rm libcurl* && cd -
 	wget https://s3-us-west-2.amazonaws.com/zboota-server/travis-ci+debian+packages/curl_7.42.1-1_amd64.deb && sudo dpkg -i curl_7.42.1-1_amd64.deb
 	sudo ldconfig
-	sudo apt-get install php5-curl
-	sudo ldconfig
 
 test:
 	phpunit tests/
