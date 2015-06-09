@@ -3,7 +3,9 @@ php: 5.5
 sudo: required
 before_script:
 - make install
-- make prepare
 - sudo ldconfig
 - make check
-script: /usr/bin/php5 phpunit.phar tests/
+script:
+- wget https://phar.phpunit.de/phpunit.phar
+- chmod +x phpunit.phar
+- /usr/bin/php5 phpunit.phar tests/
