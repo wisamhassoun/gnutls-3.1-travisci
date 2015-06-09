@@ -36,8 +36,8 @@ check:
 	ls -al /usr/lib/x86_64-linux-gnu/libcurl* || echo "No file libcurl* in /usr/lib/x86..."
 	dpkg -l|grep 7\.22 || echo "None"
 	dpkg -l|grep 2\.12 || echo "None"
-	echo '<?php phpinfo(); ?>' | php |grep -i ssl
-	echo '<?php var_dump(curl_version()); ?>' | php 
+	echo '<?php phpinfo(); ?>' | /usr/bin/php5 |grep -i ssl
+	echo '<?php var_dump(curl_version()); ?>' | /usr/bin/php5
 	pkg-config --modversion gnutls || echo "pkg-config --modversion gnutls failed"
 	pkg-config gnutls --libs || echo "pkg-config gnutls error"
 	#ldd /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4|grep gnut # Not sure what this is for
