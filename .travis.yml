@@ -3,6 +3,7 @@ php: 5.5
 sudo: required
 before_script:
 - make install
+- sudo apt-get update
 - sudo apt-get install php5-curl
 - sudo ldconfig
 - make check
