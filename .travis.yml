@@ -3,11 +3,8 @@ php: 5.5
 sudo: required
 before_script:
 - make install
-- sudo apt-get update
-- sudo apt-get install make php5-cli
+- make prepare
 - sudo ldconfig
 - make check
 script:
-- wget https://phar.phpunit.de/phpunit.phar
-- chmod +x phpunit.phar
 - /usr/bin/php5 phpunit.phar tests/
