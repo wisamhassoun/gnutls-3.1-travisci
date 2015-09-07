@@ -1,8 +1,8 @@
 <?php
 
-class curlTest extends PHPUnit_Framework_TestCase {
+class curlTest2 extends PHPUnit_Framework_TestCase {
 
-    public function testVersion() {
+    public function testWisam() {
 
 		$url = "https://api.mdi-staging.ericsson.net";
 
